@@ -28,11 +28,12 @@ console.log(processFirstItem(['foo','bar'],function(str){return str+str}));
   Study the code for counter1 and counter2, then answer the questions below.
   
   1. What is the difference between counter1 and counter2?
-  
+      The difference between the two would be that one is using closure and one is not.
   2. Which of the two uses a closure? How can you tell?
-  
+      counter1 because it is returning the counter function
   3. In what scenario would the counter1 code be preferable? In what scenario would 
      counter2 be better?  
+      if you needed to do a total count counter1, if you were doing innings or trying to find a specific count
 */
 
 // counter1 code
@@ -154,11 +155,29 @@ Use the scoreboard function below to do the following:
 ]  
   */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function scoreboard(inningScoreCB, inningCB,numInnings) {
+  const socreByInning =[];
+  let homeScore = 0;
+  let awayScore = 0;
+
+
+  for(let i = 0; i < numInnings; i++){
+    const currentInning = inningScoreCB(inningCB);
+    homeScore = homeScore + currentInning.Home
+    awayScore = awayScore + currentInning.Away
+    socreByInning.push(`inng ${i + 1}: Away ${currentInning.Away} - Home ${currentInning.Home} `)
+  }
+
+
+  if (homeScore === awayScore){
+    socreByInning.push(`This game will require extra innings : Away ${currentInning.Away} - Home ${currentInning.Home}`);
+  }else {
+    socreByInning.push(`Final Score : Away ${awayScore} - Home: ${homeScore}`);
+  }
+  return socreByInning;
 }
 
-
+console.log(scoreboard(getInningScore, 9));
 
 
 /* 🛑🛑🛑🛑🛑 Please do not modify anything below this line 🛑🛑🛑🛑🛑 */
